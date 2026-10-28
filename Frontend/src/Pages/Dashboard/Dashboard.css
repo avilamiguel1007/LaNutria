@@ -1,0 +1,430 @@
+
+/* ===== Configuración general ===== */
+
+.nutria-app {
+  --nutria-blue: #075cff;
+  --nutria-border: rgba(70, 130, 220, 0.2);
+  min-height: 100vh;
+  color: #f4f7ff;
+  background:
+    radial-gradient(
+      ellipse 65% 58% at 70% 85%,
+      rgba(0, 45, 255, 0.9) 0%,
+      rgba(0, 30, 135, 0.4) 43%,
+      transparent 100%
+    ),
+    linear-gradient(120deg, #08172e 0%, #061631 55%, #091b38 100%);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.nutria-app * {
+  box-sizing: border-box;
+}
+
+/* ===== Navbar superior ===== */
+
+.nutria-navbar {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 34px 0 48px;
+  background: rgba(7, 26, 55, 0.84);
+  border-bottom: 1px solid var(--nutria-border);
+}
+
+.nutria-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.nutria-logo {
+  width: 64px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #123b8c, #075cff);
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.08);
+}
+
+.nutria-logo span {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.nutria-brand-name {
+  font-size: 31px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.nutria-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.nutria-profile-button {
+  width: 53px;
+  height: 53px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #1269e8, #1453ad);
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+
+.nutria-profile-button:hover {
+  box-shadow: 0 0 18px rgba(37, 99, 235, 0.5);
+}
+
+.nutria-chevron {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #dbeafe;
+  border-bottom: 2px solid #dbeafe;
+  transform: rotate(45deg) translateY(-3px);
+}
+
+/* ===== Estructura principal ===== */
+
+.nutria-body {
+  min-height: calc(100vh - 80px);
+  display: flex;
+}
+
+.nutria-sidebar {
+  width: 312px;
+  flex: 0 0 312px;
+  min-height: calc(100vh - 80px);
+  padding: 40px 19px;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 31, 65, 0.94),
+    rgba(10, 29, 57, 0.75)
+  );
+  border-right: 1px solid var(--nutria-border);
+}
+
+.nutria-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nutria-menu-item {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  padding: 0 17px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: #d1def4;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.nutria-menu-item svg {
+  flex-shrink: 0;
+}
+
+.nutria-menu-item:hover {
+  background: rgba(37, 99, 235, 0.16);
+  color: #ffffff;
+}
+
+.nutria-menu-item.nutria-menu-active {
+  background: linear-gradient(105deg, #1268ff, #0754ed);
+  border-color: rgba(93, 155, 255, 0.3);
+  color: #ffffff;
+  box-shadow: 0 5px 18px rgba(0, 71, 255, 0.18);
+}
+
+/* ===== Área de contenido ===== */
+
+.nutria-main {
+  flex: 1;
+  min-width: 0;
+  padding: 27px 32px;
+}
+
+.nutria-page-heading {
+  margin-bottom: 19px;
+}
+
+.nutria-page-heading h1 {
+  margin: 0;
+  color: #f8faff;
+  font-size: 39px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -1.1px;
+}
+
+/* ===== Tarjetas de indicadores ===== */
+
+.nutria-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 21px;
+  align-items: stretch;
+}
+
+.nutria-stat-card {
+  position: relative;
+  min-width: 0;
+  min-height: 160px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 23px 22px;
+  overflow: hidden;
+  border: 1px solid rgba(89, 133, 193, 0.19);
+  border-radius: 20px;
+  background: linear-gradient(
+    125deg,
+    rgba(21, 43, 75, 0.96),
+    rgba(15, 35, 65, 0.92)
+  );
+  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.nutria-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(96, 165, 250, 0.45);
+}
+
+.nutria-stat-card.ventas {
+  border: 2px solid #0879ff;
+  background: linear-gradient(125deg, #155dd9, #0634a0);
+  box-shadow:
+    0 0 22px rgba(0, 102, 255, 0.23),
+    inset 0 0 20px rgba(255, 255, 255, 0.035);
+}
+
+.nutria-stat-card.productos {
+  border-color: rgba(0, 89, 255, 0.55);
+  background: linear-gradient(125deg, #093da9, #09245f);
+}
+
+.nutria-stat-card.ingresos {
+  background: linear-gradient(
+    125deg,
+    rgba(12, 48, 73, 0.98),
+    rgba(16, 36, 67, 0.97)
+  );
+}
+
+.nutria-stat-icon {
+  width: 76px;
+  height: 76px;
+  flex: 0 0 76px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  background: rgba(104, 132, 171, 0.22);
+  color: #e5f0ff;
+}
+
+.ventas .nutria-stat-icon {
+  background: linear-gradient(140deg, #398bff, #1971ed);
+}
+
+.clientes .nutria-stat-icon {
+  background: rgba(118, 143, 178, 0.2);
+}
+
+.ingresos .nutria-stat-icon {
+  background: rgba(0, 176, 164, 0.25);
+  color: #9ffcf5;
+}
+
+.productos .nutria-stat-icon {
+  background: linear-gradient(140deg, #0759e8, #0641c5);
+}
+
+.nutria-stat-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+  text-align: right;
+}
+
+.nutria-stat-title {
+  color: #c8d8f3;
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: 0.6px;
+}
+
+.nutria-stat-value {
+  color: #ffffff;
+  font-size: clamp(25px, 2.15vw, 40px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+  overflow-wrap: anywhere;
+}
+
+.nutria-stat-description {
+  color: #e1eaff;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+/* ===== Adaptación a diferentes pantallas ===== */
+
+@media (max-width: 1450px) {
+  .nutria-sidebar {
+    width: 270px;
+    flex-basis: 270px;
+  }
+
+  .nutria-main {
+    padding: 25px;
+  }
+
+  .nutria-stats-grid {
+    gap: 14px;
+  }
+
+  .nutria-stat-card {
+    gap: 12px;
+    padding: 19px 15px;
+  }
+
+  .nutria-stat-icon {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+  }
+
+  .nutria-stat-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nutria-stat-description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .nutria-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nutria-stat-card {
+    min-height: 135px;
+  }
+}
+
+@media (max-width: 650px) {
+  .nutria-navbar {
+    height: 70px;
+    padding: 0 16px;
+  }
+
+  .nutria-logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .nutria-logo span {
+    font-size: 28px;
+  }
+
+  .nutria-brand {
+    gap: 11px;
+  }
+
+  .nutria-brand-name {
+    font-size: 24px;
+  }
+
+  .nutria-profile-button {
+    width: 42px;
+    height: 42px;
+    font-size: 19px;
+  }
+
+  .nutria-body {
+    min-height: calc(100vh - 70px);
+  }
+
+  .nutria-sidebar {
+    width: 70px;
+    flex-basis: 70px;
+    min-height: calc(100vh - 70px);
+    padding: 20px 8px;
+  }
+
+  .nutria-menu {
+    gap: 10px;
+  }
+
+  .nutria-menu-item {
+    justify-content: center;
+    padding: 0;
+    gap: 0;
+  }
+
+  .nutria-menu-item span {
+    display: none;
+  }
+
+  .nutria-main {
+    padding: 23px 13px;
+  }
+
+  .nutria-page-heading h1 {
+    font-size: 29px;
+  }
+
+  .nutria-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .nutria-stat-card {
+    min-height: 115px;
+    align-items: center;
+    padding: 16px;
+  }
+
+  .nutria-stat-icon {
+    width: 54px;
+    height: 54px;
+    flex-basis: 54px;
+  }
+
+  .nutria-stat-value {
+    font-size: 28px;
+  }
+}
