@@ -1,7 +1,11 @@
 
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+
+// ==========================================
+// INDICADORES DEL DASHBOARD
+// ==========================================
 
 const indicadores = [
   {
@@ -34,6 +38,10 @@ const indicadores = [
   },
 ];
 
+// ==========================================
+// OPCIONES DEL MENÚ LATERAL
+// ==========================================
+
 const opcionesMenu = [
   { nombre: 'Dashboard', ruta: '/dashboard', icono: 'dashboard' },
   { nombre: 'Productos', ruta: '/productos', icono: 'products' },
@@ -45,6 +53,10 @@ const opcionesMenu = [
     icono: 'settings',
   },
 ];
+
+// ==========================================
+// COMPONENTE DE ICONOS
+// ==========================================
 
 function Icono({ tipo, size = 26 }) {
   const props = {
@@ -133,35 +145,200 @@ function Icono({ tipo, size = 26 }) {
   }
 }
 
+// ==========================================
+// DASHBOARD PRINCIPAL
+// ==========================================
+
 function Dashboard() {
+  const navigate = useNavigate();
+
+  const [menuAbierto, setMenuAbierto] = useState(false);
+  const menuRef = useRef(null);
+
+  // ==========================================
+  // RECUPERAR INFORMACIÓN DEL USUARIO
+  // ==========================================
+
+  let usuario = null;
+
+  try {
+    usuario = JSON.parse(
+      localStorage.getItem('usuario') || 'null'
+    );
+  } catch (error) {
+    console.error('Error al recuperar usuario:', error);
+  }
+
+  // Obtener datos del usuario autenticado
+  const nombre = usuario?.nombre || usuario?.usuario || 'Usuario';
+  const correo = usuario?.email || usuario?.correo || '';
+  const rol = usuario?.rol?.toLowerCase() || 'usuario';
+
+  // Obtener inicial para el avatar
+  const inicial = nombre.charAt(0).toUpperCase();
+
+  // Traducir roles
+  const nombreRol = {
+    admin: 'ADMINISTRADOR',
+    administrador: 'ADMINISTRADOR',
+    superusuario: 'SUPERUSUARIO',
+    nutriologo: 'NUTRIÓLOGO',
+    'nutriólogo': 'NUTRIÓLOGO',
+    paciente: 'PACIENTE',
+    usuario: 'USUARIO',
+  };
+
+  const rolMostrar = nombreRol[rol] || rol.toUpperCase();
+
+  // ==========================================
+  // CERRAR MENÚ AL HACER CLIC FUERA
+  // ==========================================
+
+  useEffect(() => {
+    const cerrarMenuExterno = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        setMenuAbierto(false);
+      }
+    };
+
+    document.addEventListener('mousedown', cerrarMenuExterno);
+
+    return () => {
+      document.removeEventListener('mousedown', cerrarMenuExterno);
+    };
+  }, []);
+
+  // ==========================================
+  // CERRAR SESIÓN
+  // ==========================================
+
+  const cerrarSesion = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+
+    navigate('/login', { replace: true });
+  };
+
+  // ==========================================
+  // INTERFAZ
+  // ==========================================
+
   return (
     <div className="nutria-app">
+
+      {/* BARRA SUPERIOR */}
+
       <header className="nutria-navbar">
+
         <NavLink to="/dashboard" className="nutria-brand">
           <div className="nutria-logo" aria-hidden="true">
             <span>🦦</span>
           </div>
 
-          <span className="nutria-brand-name">Nutria</span>
+          <span className="nutria-brand-name">
+            Nutria
+          </span>
         </NavLink>
 
-        <div className="nutria-navbar-actions">
+        {/* MENÚ DESPLEGABLE DEL USUARIO */}
+
+        <div
+          className="nutria-navbar-actions"
+          ref={menuRef}
+        >
+
           <button
             type="button"
             className="nutria-profile-button"
-            aria-label="Perfil del usuario"
-            title="Perfil del usuario"
+            aria-label="Abrir menú de usuario"
+            aria-expanded={menuAbierto}
+            onClick={() => setMenuAbierto(!menuAbierto)}
           >
-            A
+            {inicial}
           </button>
 
-          <span className="nutria-chevron" aria-hidden="true" />
+          <button
+            type="button"
+            className={`nutria-chevron-button ${
+              menuAbierto ? 'abierto' : ''
+            }`}
+            aria-label="Mostrar opciones de usuario"
+            onClick={() => setMenuAbierto(!menuAbierto)}
+          >
+            <span className="nutria-chevron" />
+          </button>
+
+          {menuAbierto && (
+            <div className="nutria-dropdown">
+
+              {/* INFORMACIÓN DEL USUARIO */}
+
+              <div className="nutria-dropdown-header">
+
+                <div className="nutria-dropdown-avatar">
+                  {inicial}
+                </div>
+
+                <div className="nutria-dropdown-user">
+                  <strong>{nombre}</strong>
+                  <span>{correo}</span>
+                </div>
+
+                <span className={`nutria-role-badge ${rol}`}>
+                  {rolMostrar}
+                </span>
+
+              </div>
+
+              <div className="nutria-dropdown-divider" />
+
+              {/* MI PERFIL */}
+
+              <button
+                type="button"
+                className="nutria-dropdown-item"
+                onClick={() => {
+                  setMenuAbierto(false);
+                  navigate('/perfil');
+                }}
+              >
+                <span>👤</span>
+                Mi perfil
+              </button>
+
+              {/* CERRAR SESIÓN */}
+
+              <button
+                type="button"
+                className="nutria-dropdown-item nutria-logout"
+                onClick={cerrarSesion}
+              >
+                <span>↪</span>
+                Cerrar sesión
+              </button>
+
+            </div>
+          )}
+
         </div>
       </header>
 
+      {/* CUERPO PRINCIPAL */}
+
       <div className="nutria-body">
+
+        {/* MENÚ LATERAL */}
+
         <aside className="nutria-sidebar">
-          <nav className="nutria-menu" aria-label="Navegación principal">
+
+          <nav
+            className="nutria-menu"
+            aria-label="Navegación principal"
+          >
+
             {opcionesMenu.map((opcion) => (
               <NavLink
                 key={opcion.ruta}
@@ -172,32 +349,45 @@ function Dashboard() {
                   }`
                 }
               >
+
                 <Icono tipo={opcion.icono} size={27} />
+
                 <span>{opcion.nombre}</span>
+
               </NavLink>
             ))}
+
           </nav>
+
         </aside>
 
+        {/* CONTENIDO DEL DASHBOARD */}
+
         <main className="nutria-main">
+
           <div className="nutria-page-heading">
             <h1>Dashboard</h1>
           </div>
+
+          {/* TARJETAS DE INDICADORES */}
 
           <section
             className="nutria-stats-grid"
             aria-label="Indicadores principales"
           >
+
             {indicadores.map((indicador) => (
               <article
                 key={indicador.titulo}
                 className={`nutria-stat-card ${indicador.color}`}
               >
+
                 <div className="nutria-stat-icon">
                   <Icono tipo={indicador.icono} size={35} />
                 </div>
 
                 <div className="nutria-stat-info">
+
                   <span className="nutria-stat-title">
                     {indicador.titulo}
                   </span>
@@ -209,11 +399,16 @@ function Dashboard() {
                   <span className="nutria-stat-description">
                     {indicador.descripcion}
                   </span>
+
                 </div>
+
               </article>
             ))}
+
           </section>
+
         </main>
+
       </div>
     </div>
   );

@@ -1,24 +1,75 @@
 
 import React from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Login = () => {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  // Evitar mostrar Login si ya existe una sesión
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  // Iniciar sesión mediante el backend
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const email = formData.get('email');
+
+    const usuario = formData.get('usuario');
     const password = formData.get('password');
 
-    console.log('Correo:', email);
-    console.log('Formulario enviado');
-    
-    // Aquí puedes integrar la autenticación con tu backend.
-    // No envíes contraseñas a la consola en producción.
+    try {
+      const respuesta = await fetch(
+        'http://localhost:3000/api/auth/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            usuario,
+            password
+          })
+        }
+      );
+
+      const datos = await respuesta.json();
+
+      // Validar respuesta del servidor
+      if (!respuesta.ok) {
+        alert(datos.mensaje || 'Error al iniciar sesión');
+        return;
+      }
+
+      // Guardar información del usuario
+      localStorage.setItem('token', 'sesion_activa');
+
+      localStorage.setItem(
+        'usuario',
+        JSON.stringify(datos.usuario)
+      );
+
+      console.log(
+        'Inicio de sesión exitoso:',
+        datos.usuario
+      );
+
+      // Redirigir al Dashboard
+      navigate('/dashboard', { replace: true });
+
+    } catch (error) {
+      console.error('Error de conexión:', error);
+
+      alert('No se pudo conectar con el servidor');
+    }
   };
 
+  // Inicio de sesión con Google
   const handleGoogleLogin = () => {
-    // Aquí puedes integrar la autenticación con Google.
     console.log('Iniciar autenticación con Google');
   };
 
@@ -27,20 +78,23 @@ const Login = () => {
       <div className="container">
         <div className="login-box">
           <form className="form" onSubmit={handleSubmit}>
+
             <div className="logo" aria-hidden="true" />
 
             <span className="header">Welcome Back!</span>
 
+            {/* Campo de usuario */}
             <input
-              type="email"
-              name="email"
-              placeholder="Email"
+              type="text"
+              name="usuario"
+              placeholder="Username"
               className="input"
-              autoComplete="email"
-              aria-label="Correo electrónico"
+              autoComplete="username"
+              aria-label="Nombre de usuario"
               required
             />
 
+            {/* Campo de contraseña */}
             <input
               type="password"
               name="password"
@@ -102,6 +156,7 @@ const Login = () => {
                 Forgot password?
               </a>
             </p>
+
           </form>
         </div>
       </div>

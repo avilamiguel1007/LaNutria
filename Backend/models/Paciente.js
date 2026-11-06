@@ -23,6 +23,12 @@ const pacienteSchema = new mongoose.Schema({
     required: true,
     min: 18,
     max: 65
+  },
+
+  nutriologo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Nutriologo",
+    required: true
   }
 });
 
