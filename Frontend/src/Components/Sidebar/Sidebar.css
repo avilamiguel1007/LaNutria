@@ -1,0 +1,293 @@
+
+/* ==========================================
+   1. MENÚ LATERAL
+========================================== */
+
+.nutria-sidebar {
+  position: relative;
+  z-index: 2;
+
+  width: 312px;
+  flex: 0 0 312px;
+
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 35px 19px;
+
+  overflow: hidden;
+
+  /* Sidebar completamente transparente */
+  background: transparent !important;
+
+  /* Sin desenfoque ni separaciones exteriores */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* ==========================================
+   2. DECORACIÓN INFERIOR
+========================================== */
+
+.nutria-sidebar::before {
+  content: "";
+
+  position: absolute;
+  z-index: -1;
+
+  width: 260px;
+  height: 260px;
+
+  bottom: -135px;
+  left: -75px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(139, 213, 46, 0.20),
+    rgba(139, 213, 46, 0.04) 65%,
+    transparent 75%
+  );
+
+  pointer-events: none;
+}
+
+.nutria-sidebar::after {
+  content: "";
+
+  position: absolute;
+  z-index: -1;
+
+  width: 220px;
+  height: 220px;
+
+  bottom: -125px;
+  right: -105px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(69, 197, 188, 0.18),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+/* ==========================================
+   3. CONTENEDOR DE NAVEGACIÓN - GLASS
+========================================== */
+
+.nutria-menu {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  margin: 8px 0;
+  padding: 12px;
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.38);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 22px;
+
+  box-shadow:
+    0 8px 25px rgba(20, 80, 55, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   4. OPCIONES DEL MENÚ
+========================================== */
+
+.nutria-menu-item {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 19px;
+
+  padding: 0 17px;
+
+  border: 1px solid transparent;
+  border-radius: 15px;
+
+  background: transparent;
+
+  color: #285b55;
+
+  text-decoration: none;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+/* Iconos */
+
+.nutria-menu-item svg {
+  width: 25px;
+  height: 25px;
+
+  flex-shrink: 0;
+
+  color: #245b54;
+
+  transition: color 0.22s ease;
+}
+
+/* ==========================================
+   5. EFECTO HOVER
+========================================== */
+
+.nutria-menu-item:hover {
+  background: linear-gradient(
+    105deg,
+    #19a95a 0%,
+    #8bd52e 100%
+  );
+
+  color: #ffffff;
+
+  transform: translateX(3px);
+
+  box-shadow: 0 5px 15px rgba(38, 166, 91, 0.18);
+}
+
+.nutria-menu-item:hover svg {
+  color: #ffffff;
+}
+
+/* ==========================================
+   6. OPCIÓN ACTIVA SIN COLOR PERMANENTE
+========================================== */
+
+.nutria-menu-item.nutria-menu-active {
+  background: transparent;
+
+  border-color: transparent;
+
+  color: #285b55;
+
+  box-shadow: none;
+
+  transform: none;
+}
+
+.nutria-menu-item.nutria-menu-active svg {
+  color: #245b54;
+}
+
+/* Hover también para la opción activa */
+
+.nutria-menu-item.nutria-menu-active:hover {
+  background: linear-gradient(
+    105deg,
+    #19a95a 0%,
+    #8bd52e 100%
+  );
+
+  color: #ffffff;
+
+  transform: translateX(3px);
+
+  box-shadow: 0 5px 15px rgba(38, 166, 91, 0.18);
+}
+
+.nutria-menu-item.nutria-menu-active:hover svg {
+  color: #ffffff;
+}
+
+/* ==========================================
+   7. RESPONSIVE - TABLETS
+========================================== */
+
+@media (max-width: 1450px) {
+
+  .nutria-sidebar {
+    /* Mantener transparencia en tablets */
+    background: transparent !important;
+
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .nutria-menu-item {
+    gap: 15px;
+    font-size: 15px;
+  }
+}
+
+/* ==========================================
+   8. RESPONSIVE - MÓVILES
+========================================== */
+
+@media (max-width: 650px) {
+
+  .nutria-sidebar {
+    width: 70px;
+    flex: 0 0 70px;
+
+    min-height: calc(100vh - 70px);
+
+    padding: 20px 8px;
+
+    background: transparent !important;
+  }
+
+  .nutria-menu {
+    gap: 10px;
+
+    padding: 5px;
+    margin: 0;
+
+    border-radius: 16px;
+  }
+
+  .nutria-menu-item {
+    min-height: 52px;
+
+    justify-content: center;
+
+    padding: 0;
+    gap: 0;
+
+    border-radius: 13px;
+  }
+
+  .nutria-menu-item span {
+    display: none;
+  }
+
+  .nutria-menu-item svg {
+    width: 23px;
+    height: 23px;
+  }
+}

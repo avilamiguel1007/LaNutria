@@ -1,0 +1,511 @@
+
+/* ==========================================
+   1. BARRA SUPERIOR
+========================================== */
+
+.nutria-navbar {
+  position: relative;
+  z-index: 100;
+  overflow: visible;
+
+  width: 100%;
+  height: 80px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 34px 0 35px;
+  box-sizing: border-box;
+
+  /* Transparencia completa */
+  background: transparent !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* ==========================================
+   2. MARCA Y LOGOTIPO
+========================================== */
+
+.nutria-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 8px 18px;
+
+  color: #174f49;
+  text-decoration: none;
+
+  flex-shrink: 0;
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 28px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 4px 18px rgba(20, 80, 55, 0.06);
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nutria-brand:hover {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 5px 18px rgba(20, 80, 55, 0.09);
+}
+
+.nutria-logo {
+  width: 64px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  overflow: hidden;
+
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.nutria-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  padding: 0;
+}
+
+.nutria-brand-name {
+  color: #164b49;
+
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+
+  white-space: nowrap;
+}
+
+/* ==========================================
+   3. ACCIONES DEL USUARIO
+========================================== */
+
+.nutria-navbar-actions {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+  flex-shrink: 0;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* ==========================================
+   4. BOTÓN DE NOTIFICACIONES
+========================================== */
+
+.nutria-notification-button {
+  width: 49px;
+  height: 49px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  border-radius: 50%;
+
+  color: #164b49;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 15px rgba(20, 80, 55, 0.05);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nutria-notification-button:hover {
+  background: rgba(255, 255, 255, 0.90);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(20, 80, 55, 0.10);
+}
+
+/* ==========================================
+   5. CONTENEDOR DEL PERFIL
+========================================== */
+
+.nutria-profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+  padding: 5px 10px 5px 5px;
+
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  border-radius: 30px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 4px 18px rgba(20, 80, 55, 0.06);
+}
+
+/* ==========================================
+   6. BOTÓN DEL USUARIO
+========================================== */
+
+.nutria-profile-button {
+  width: 49px;
+  height: 49px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+  padding: 0;
+
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+
+  background: linear-gradient(
+    145deg,
+    #20a66b,
+    #08754e
+  );
+
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 21px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(22, 139, 80, 0.17);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.nutria-profile-button:hover {
+  background: linear-gradient(
+    145deg,
+    #27b875,
+    #096b48
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 5px 15px rgba(22, 139, 80, 0.25);
+}
+
+/* ==========================================
+   7. FLECHA DESPLEGABLE
+========================================== */
+
+.nutria-chevron-button {
+  width: 25px;
+  height: 35px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.nutria-chevron {
+  width: 10px;
+  height: 10px;
+
+  border-right: 2px solid #285b55;
+  border-bottom: 2px solid #285b55;
+
+  transform: rotate(45deg) translateY(-3px);
+
+  transition: transform 0.2s ease;
+}
+
+.nutria-chevron-button.abierto .nutria-chevron {
+  transform: rotate(225deg) translate(-2px, -2px);
+}
+
+/* ==========================================
+   8. MENÚ DESPLEGABLE
+========================================== */
+
+.nutria-dropdown {
+  position: absolute;
+
+  top: calc(100% + 16px);
+  right: 0;
+
+  z-index: 200;
+
+  width: 320px;
+  padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+  color: #164b49;
+
+  border: 1px solid #e1ebe2;
+  border-radius: 18px;
+
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.05),
+    0 12px 35px rgba(20, 75, 55, 0.14);
+
+  animation: nutria-menu-entrada 0.18s ease-out;
+
+  box-sizing: border-box;
+}
+
+@keyframes nutria-menu-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   9. INFORMACIÓN DEL USUARIO
+========================================== */
+
+.nutria-dropdown-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+  padding: 18px 12px;
+
+  text-align: center;
+}
+
+.nutria-dropdown-avatar {
+  width: 65px;
+  height: 65px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    145deg,
+    #20a66b,
+    #08754e
+  );
+
+  color: #ffffff;
+
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.nutria-dropdown-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 5px;
+  width: 100%;
+}
+
+.nutria-dropdown-user strong {
+  color: #164b49;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.nutria-dropdown-user span {
+  color: #718075;
+
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   10. ETIQUETA DEL ROL
+========================================== */
+
+.nutria-role-badge {
+  padding: 5px 12px;
+
+  border-radius: 20px;
+  background: #168b50;
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.nutria-role-badge.usuario {
+  background: #43b9ae;
+}
+
+.nutria-role-badge.admin,
+.nutria-role-badge.administrador {
+  background: #08754e;
+}
+
+/* ==========================================
+   11. SEPARADOR Y OPCIONES
+========================================== */
+
+.nutria-dropdown-divider {
+  width: 100%;
+  height: 1px;
+
+  margin: 4px 0;
+
+  background: #e5eee7;
+}
+
+.nutria-dropdown-item {
+  width: 100%;
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+  padding: 10px 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: transparent;
+  color: #285b55;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.nutria-dropdown-item:hover {
+  background: #edf7ed;
+  color: #08754e;
+}
+
+.nutria-dropdown-item span {
+  font-size: 18px;
+}
+
+/* ==========================================
+   12. CERRAR SESIÓN
+========================================== */
+
+.nutria-dropdown-item.nutria-logout {
+  color: #c43c35;
+}
+
+.nutria-dropdown-item.nutria-logout:hover {
+  background: #fff0ed;
+  color: #a52822;
+}
+
+/* ==========================================
+   13. RESPONSIVE - MÓVILES
+========================================== */
+
+@media (max-width: 650px) {
+
+  .nutria-navbar {
+    height: 70px;
+    padding: 0 16px;
+  }
+
+  .nutria-brand {
+    gap: 8px;
+    padding: 5px 10px;
+  }
+
+  .nutria-logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .nutria-logo img {
+    padding: 3px;
+  }
+
+  .nutria-brand-name {
+    font-size: 20px;
+  }
+
+  .nutria-navbar-actions {
+    gap: 8px;
+  }
+
+  .nutria-notification-button {
+    width: 42px;
+    height: 42px;
+  }
+
+  .nutria-profile-container {
+    gap: 6px;
+    padding: 4px 7px 4px 4px;
+  }
+
+  .nutria-profile-button {
+    width: 42px;
+    height: 42px;
+    font-size: 19px;
+  }
+
+  .nutria-dropdown {
+    width: min(320px, calc(100vw - 24px));
+  }
+}

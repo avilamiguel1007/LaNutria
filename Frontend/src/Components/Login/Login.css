@@ -1,0 +1,607 @@
+
+/* =========================================
+   1. VARIABLES DE DISEÑO
+========================================= */
+
+:root {
+  --verde-principal: #245b43;
+  --verde-oscuro: #173e2e;
+  --verde-claro: #e8f1e9;
+  --crema: #f8f7f0;
+  --blanco: #ffffff;
+  --texto: #26372d;
+  --texto-secundario: #718075;
+  --borde: #dce5dc;
+}
+
+/* =========================================
+   2. CONTENEDOR PRINCIPAL
+========================================= */
+
+.login-wrapper {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  background-color: var(--crema);
+}
+
+/* =========================================
+   3. IMAGEN DE FONDO
+========================================= */
+
+.container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  width: 100%;
+  min-height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 115px 7% 40px;
+
+  box-sizing: border-box;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(15, 35, 24, 0.02) 0%,
+      rgba(15, 35, 24, 0.01) 55%,
+      rgba(15, 35, 24, 0.04) 100%
+    ),
+    url("../../../public/nutria-hero.jpg");
+
+  /* Ajuste de tamaño sin cambiar la imagen */
+
+  background-size: cover;
+
+  /* Mostrar mejor la parte superior de la fotografía */
+
+  background-position: center 25%;
+
+  background-repeat: no-repeat;
+}
+
+/* =========================================
+   4. ENCABEZADO FLOTANTE
+========================================= */
+
+.login-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  width: 100%;
+  height: 95px;
+
+  padding: 0 7%;
+
+  box-sizing: border-box;
+
+  background: transparent;
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  border: none;
+  box-shadow: none;
+}
+
+/* =========================================
+   5. LOGOTIPO
+========================================= */
+
+.login-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+  width: fit-content;
+
+  color: var(--verde-oscuro);
+
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: opacity 0.2s ease;
+}
+
+.login-brand:hover {
+  opacity: 0.8;
+}
+
+.login-brand-logo {
+  display: block;
+
+  width: 55px;
+  height: 55px;
+
+  object-fit: contain;
+}
+
+/* =========================================
+   6. NAVEGACIÓN
+========================================= */
+
+.login-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+}
+
+.login-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 17px;
+
+  border-radius: 25px;
+
+  background: transparent;
+  color: var(--verde-oscuro);
+
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Ninguna opción permanece seleccionada */
+
+.login-nav a.active {
+  background: transparent;
+  color: var(--verde-oscuro);
+}
+
+/* Verde únicamente al pasar el cursor */
+
+.login-nav a:hover,
+.login-nav a.active:hover {
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   7. ICONO DE PERFIL
+========================================= */
+
+.login-profile {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  padding: 9px;
+
+  border: 1.5px solid var(--verde-principal);
+  border-radius: 50%;
+
+  background: transparent;
+  color: var(--verde-oscuro);
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.login-profile:hover {
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+
+  transform: translateY(-2px);
+}
+
+.login-profile svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================
+   8. TARJETA DE INICIO DE SESIÓN
+========================================= */
+
+.login-box {
+  position: relative;
+  z-index: 2;
+
+  width: min(390px, 100%);
+
+  margin: 0;
+  padding: 38px 32px;
+
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+
+  box-shadow: 0 15px 45px rgba(20, 50, 30, 0.16);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* =========================================
+   9. FORMULARIO
+========================================= */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  width: 100%;
+
+  gap: 16px;
+}
+
+/* =========================================
+   10. TÍTULO Y SUBTÍTULO
+========================================= */
+
+.login-heading {
+  margin-bottom: 12px;
+
+  text-align: center;
+}
+
+.header {
+  margin: 0;
+
+  color: var(--verde-oscuro);
+
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+
+  color: var(--texto-secundario);
+
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* =========================================
+   11. CAMPOS DE TEXTO
+========================================= */
+
+.input {
+  width: 100%;
+  height: 49px;
+
+  padding: 0 16px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+
+  outline: none;
+
+  background-color: #fbfcfa;
+
+  color: var(--texto);
+
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.input::placeholder {
+  color: #929e94;
+}
+
+.input:focus {
+  border-color: var(--verde-principal);
+
+  background-color: var(--blanco);
+
+  box-shadow: 0 0 0 3px rgba(36, 91, 67, 0.12);
+}
+
+/* =========================================
+   12. BOTONES
+========================================= */
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 49px;
+
+  padding: 12px 18px;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Botón iniciar sesión */
+
+.sign-in {
+  margin-top: 5px;
+
+  background-color: var(--verde-principal);
+  color: var(--blanco);
+
+  box-shadow: 0 5px 12px rgba(36, 91, 67, 0.18);
+}
+
+.sign-in:hover {
+  background-color: var(--verde-oscuro);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 7px 16px rgba(36, 91, 67, 0.23);
+}
+
+/* Botón Google */
+
+.google-sign-in {
+  gap: 10px;
+
+  border: 1px solid var(--borde);
+
+  background-color: var(--blanco);
+  color: var(--texto);
+}
+
+.google-sign-in:hover {
+  background-color: var(--verde-claro);
+  border-color: #b9cfbd;
+}
+
+.google-sign-in .icon {
+  display: block;
+
+  width: 19px;
+  height: 19px;
+}
+
+/* =========================================
+   13. ENLACES INFERIORES
+========================================= */
+
+.footer {
+  margin-top: 10px;
+
+  color: var(--texto-secundario);
+
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+
+  line-height: 1.8;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.link {
+  color: var(--verde-principal);
+
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--verde-oscuro);
+  text-decoration: underline;
+}
+
+/* =========================================
+   14. TABLETS
+========================================= */
+
+@media (max-width: 900px) {
+
+  .login-header {
+    height: 80px;
+    padding: 0 25px;
+
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .login-brand {
+    gap: 8px;
+    font-size: 15px;
+  }
+
+  .login-brand-logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .login-nav {
+    gap: 15px;
+  }
+
+  .login-nav a {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .login-profile {
+    width: 38px;
+    height: 38px;
+  }
+
+  .container {
+    justify-content: center;
+
+    padding: 110px 25px 35px;
+
+    background-position: center 25%;
+  }
+
+  .login-box {
+    width: min(390px, 100%);
+  }
+}
+
+/* =========================================
+   15. DISPOSITIVOS MÓVILES
+========================================= */
+
+@media (max-width: 600px) {
+
+  .login-header {
+    height: 72px;
+    padding: 0 15px;
+  }
+
+  .login-brand {
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .login-brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .login-nav {
+    gap: 8px;
+  }
+
+  .login-nav a {
+    font-size: 10px;
+    padding: 7px 9px;
+  }
+
+  .login-nav a:nth-child(n+3) {
+    display: none;
+  }
+
+  .login-profile {
+    width: 34px;
+    height: 34px;
+    padding: 7px;
+  }
+
+  .container {
+    justify-content: center;
+
+    min-height: 100%;
+
+    padding: 100px 18px 25px;
+
+    background-position: center 25%;
+  }
+
+  .login-box {
+    width: 100%;
+    max-width: 370px;
+
+    padding: 30px 23px;
+
+    border-radius: 16px;
+  }
+
+  .header {
+    font-size: 25px;
+  }
+
+  .input,
+  .button {
+    min-height: 46px;
+  }
+}
+
+/* =========================================
+   16. PANTALLAS DE POCA ALTURA
+========================================= */
+
+@media (max-height: 650px) and (min-width: 601px) {
+
+  .container {
+    padding-top: 110px;
+    padding-bottom: 20px;
+  }
+
+  .login-box {
+    padding: 24px 28px;
+  }
+
+  .form {
+    gap: 11px;
+  }
+
+  .login-heading {
+    margin-bottom: 5px;
+  }
+
+  .header {
+    font-size: 25px;
+  }
+
+  .input,
+  .button {
+    min-height: 43px;
+  }
+}
